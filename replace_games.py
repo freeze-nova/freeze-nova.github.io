@@ -233,9 +233,8 @@ def generate_category_pages(categories, category_map, template_content):
         content = re.sub(r'<title>.*?</title>', f"<title>{cat} Games - Freeze-Nova</title>", content, flags=re.DOTALL)
         content = re.sub(r'<h1.*?>.*?</h1>', f'<h1 style="font-weight: bolder; color: white; text-align: center">{cat} Games</h1>', content, flags=re.DOTALL)
         
-        # CLEANUP: Remove iframe/description section for categories to fix grid layout
         grid_container_start = '<div class="row grid-container">'
-        if grid_container_start in content:
+        if grid_container_start in content and '<!-- GAME GRID START -->' in content:
             # Keep only the row start and the game grid markers
             parts = content.split(grid_container_start)
             head_part = parts[0]
